@@ -1,6 +1,9 @@
 FactoryGirl.define do
+  pw = RandomData.random_sentence
+  
   factory :user do
-    email "user@factory.com" 
-    password  "123456"
+    sequence(:email){|n| "user#{n}@factory.com" }
+    password pw
+    role :standard
   end
 end
