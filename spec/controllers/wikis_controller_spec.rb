@@ -56,16 +56,16 @@ RSpec.describe WikisController, type: :controller do
  
   describe "POST create" do
     it "increases the number of Wiki by 1" do
-      expect{post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}}.to change(Wiki,:count).by(1)
+      expect{post :create, wiki: {title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, user: user}}.to change(Wiki,:count).by(1)
     end
     
     it "assigns the new wiki to @wiki" do
-      post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}
+      post :create, wiki: {title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, user: user}
       expect(assigns(:wiki)).to eq Wiki.last
     end
  
     it "redirects to the new wiki" do
-      post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}
+      post :create, wiki: {title: Faker::Lorem.sentence, body: Faker::Lorem.paragraph, user: user}
       expect(response).to redirect_to Wiki.last
     end
   end
@@ -94,8 +94,8 @@ RSpec.describe WikisController, type: :controller do
   
   describe "PUT update" do
      it "updates wiki with expected attributes" do
-       new_title = "New Wiki title"
-       new_body = "New Wiki body"
+       new_title = Faker::Lorem.sentence
+       new_body = Faker::Lorem.paragraph
  
        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
  
@@ -106,8 +106,8 @@ RSpec.describe WikisController, type: :controller do
      end
  
      it "redirects to the updated wiki" do
-       new_title = "New Wiki title"
-       new_body = "New Wiki body"
+       new_title = Faker::Lorem.sentence
+       new_body = Faker::Lorem.paragraph
  
        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
        

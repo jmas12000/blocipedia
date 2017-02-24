@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :wiki do
-    title "MyString"
-    body "MyText is for the factory Wiki body"
+    title Faker::Lorem.sentence
+    body Faker::Lorem.paragraph
     user 
     private false
   end
