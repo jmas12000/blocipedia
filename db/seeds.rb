@@ -1,9 +1,9 @@
-require 'random_data'
 
-5.times do
+
+1.times do
   User.create!(
-  email:    RandomData.random_email,
-  password: RandomData.random_sentence
+  email:    "random@example.com",
+  password: "12345678"
   )
 end
 users = User.all
@@ -11,8 +11,8 @@ users = User.all
 50.times do
   Wiki.create!(
     user:   users.sample,
-    title:  RandomData.random_sentence,
-    body:   RandomData.random_paragraph
+    title:  "Wiki title",
+    body:   "Wiki body"
   )
 end
 wikis = Wiki.all

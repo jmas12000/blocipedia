@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  let(:user) {User.create!(email: "jmas1_2000@yahoo.com", password: "123456") } 
-  let(:my_wiki) { Wiki.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
-
+  let(:user) {create(:user) } 
+  let(:my_wiki) { create(:wiki) }
+  
+  before :each do
+    sign_in user
+  end
+  
   describe "GET index" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
     it "returns http success" do
       get :index
       expect(response).to have_http_status(:success)
@@ -21,10 +21,6 @@ RSpec.describe WikisController, type: :controller do
   end
 
   describe "GET show" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
     it "returns http success" do
       get :show, {id: my_wiki.id}
       expect(response).to have_http_status(:success)
@@ -41,11 +37,7 @@ RSpec.describe WikisController, type: :controller do
     end
   end
 
-  describe "GET new" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-      
+  describe "GET new" do  
     it "returns http success" do
       get :new
       expect(response).to have_http_status(:success)
@@ -63,30 +55,22 @@ RSpec.describe WikisController, type: :controller do
   end
  
   describe "POST create" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
     it "increases the number of Wiki by 1" do
-      expect{post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user}}.to change(Wiki,:count).by(1)
+      expect{post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}}.to change(Wiki,:count).by(1)
     end
     
     it "assigns the new wiki to @wiki" do
-      post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user}
+      post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}
       expect(assigns(:wiki)).to eq Wiki.last
     end
  
     it "redirects to the new wiki" do
-      post :create, wiki: {title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user}
+      post :create, wiki: {title: "New Wiki title", body: "New Wiki body", user: user}
       expect(response).to redirect_to Wiki.last
     end
   end
 
   describe "GET edit" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
     it "returns http success" do
       get :edit, {id: my_wiki.id}
       expect(response).to have_http_status(:success)
@@ -109,13 +93,9 @@ RSpec.describe WikisController, type: :controller do
   end
   
   describe "PUT update" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
      it "updates wiki with expected attributes" do
-       new_title = RandomData.random_sentence
-       new_body = RandomData.random_paragraph
+       new_title = "New Wiki title"
+       new_body = "New Wiki body"
  
        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
  
@@ -126,8 +106,8 @@ RSpec.describe WikisController, type: :controller do
      end
  
      it "redirects to the updated wiki" do
-       new_title = RandomData.random_sentence
-       new_body = RandomData.random_paragraph
+       new_title = "New Wiki title"
+       new_body = "New Wiki body"
  
        put :update, id: my_wiki.id, wiki: {title: new_title, body: new_body}
        
@@ -136,10 +116,6 @@ RSpec.describe WikisController, type: :controller do
   end
   
   describe "DELETE destroy" do
-    before do
-      allow(controller).to receive(:authenticate_user!).and_return(true)
-    end
-    
     it "deletes the wiki" do
       delete :destroy, {id: my_wiki.id}
       count = Wiki.where({id: my_wiki.id}).size

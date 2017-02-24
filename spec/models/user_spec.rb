@@ -10,7 +10,6 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_length_of(:password).is_at_least(6) }
 
   describe "User attributes" do
-    
     it "should have password and email attributes" do
       expect(user).to have_attributes(password: user.password, email: user.email)
     end
