@@ -2,11 +2,13 @@
  
 <div class="row">
   <div class="col-md-4">
-    <p>Guidelines for wikis</p>
+    <p>A website that allows collaborative editing of its content and structure by its users</p>
     <ul>
-      <li>Make sure it rhymes.</li>
-      <li>Don't use the letter "A".</li>
-      <li>The incessant use of hashtags will get you banned.</li>
+      <li>Wikis permit asynchronous communication and group collaboration
+across the Interne</li>
+      <li> The results of the users’ actions on the content of
+the site are instantly visible to other users</li>
+      <li> The term "Wiki" is used as an alliterative substitute for quick</li>
     </ul>
   </div>
   <div class="col-md-8">
@@ -15,6 +17,12 @@
         <%= f.label :title %>
         <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
       </div>
+      <% if current_user.admin? || current_user.premium? %>
+        <div class="form-group">
+          <%= f.label :private %>
+          <%= f.check_box :private %> 
+        </div>
+      <% end %>
       <div class="form-group">
         <%= f.label :body %>
         <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>

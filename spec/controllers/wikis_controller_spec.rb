@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
-  let(:user) {create(:user) } 
+  let(:user) {create(:user) }
+  let(:other_user) {create(:user) }
   let(:my_wiki) { create(:wiki) }
   
   before :each do
     sign_in user
+    sign_in other_user
   end
   
   describe "GET index" do
@@ -125,6 +127,32 @@ RSpec.describe WikisController, type: :controller do
     it "redirects to wikis index" do
       delete :destroy, {id: my_wiki.id}
       expect(response).to redirect_to wikis_path
+    end
+  end
+  
+  context "admin user able to view private wiki" do
+    before do
+      other_user.admin!
+    end
+    
+    describe "Get private Wiki" do
+      it "returns http success" do
+        get :show, id: my_wiki.id, private: my_wiki.private = true
+        expect(response).to have_http_status(:success)
+      end
+    end
+  end
+  
+  context "premium user able to view private wiki" do
+    before do
+      other_user.premium!
+    end
+    
+    describe "Get private Wiki" do
+      it "returns http success" do
+        get :show, id: my_wiki.id, private: my_wiki.private = true
+        expect(response).to have_http_status(:success)
+      end
     end
   end
 end
