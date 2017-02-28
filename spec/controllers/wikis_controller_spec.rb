@@ -2,12 +2,11 @@ require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
   let(:user) {create(:user) }
-  let(:other_user) {create(:user) }
   let(:my_wiki) { create(:wiki) }
+  let(:my_private_wiki) { create(:wiki, private: true) }
   
   before :each do
     sign_in user
-    sign_in other_user
   end
   
   describe "GET index" do
@@ -132,26 +131,36 @@ RSpec.describe WikisController, type: :controller do
   
   context "admin user able to view private wiki" do
     before do
-      other_user.admin!
+      user.admin!
     end
     
     describe "Get private Wiki" do
       it "returns http success" do
-        get :show, id: my_wiki.id, private: my_wiki.private = true
+        get :show, id: my_private_wiki.id
         expect(response).to have_http_status(:success)
       end
     end
   end
   
   context "premium user able to view private wiki" do
-    before do
-      other_user.premium!
+     before do
+      user.premium!
     end
     
     describe "Get private Wiki" do
       it "returns http success" do
-        get :show, id: my_wiki.id, private: my_wiki.private = true
+        get :show, id: my_private_wiki.id, user: my_premium_user
         expect(response).to have_http_status(:success)
+      end
+    end
+  end
+  
+  context "standard user not able to view private wiki" do
+   
+    describe "Get private Wiki" do
+      it "returns http failure" do
+        get :show, id: my_private_wiki.id
+        expect(response).to_not have_http_status(:success)
       end
     end
   end

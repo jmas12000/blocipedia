@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   
-  before_action :authorize_user, only: :show
+  before_action :authorize_user, only: [:show]
   
   def index
     @wikis = Wiki.all
@@ -63,7 +63,6 @@ class WikisController < ApplicationController
   end
   
   private
-  
  
   def authorize_user
     wiki = Wiki.find(params[:id])

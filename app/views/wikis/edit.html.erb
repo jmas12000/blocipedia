@@ -19,7 +19,7 @@ the site are instantly visible to other users</li>
       </div>
       <% if current_user.admin? || current_user.premium? %>
         <div class="form-group">
-          <%= f.label :private %>
+          <%= f.label :private, class: 'checkbox' %> Private wiki
           <%= f.check_box :private %> 
         </div>
       <% end %>
