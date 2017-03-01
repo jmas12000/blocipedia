@@ -24,6 +24,9 @@ source 'https://rubygems.org'
  gem 'devise'
  gem 'pundit'
  gem 'stripe'
+ gem 'redcarpet'
+ gem 'albino'
+ gem 'nokogiri'
  
  
  group :development, :test do

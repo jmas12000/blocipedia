@@ -1,4 +1,5 @@
 class WikisController < ApplicationController
+  include ApplicationHelper
   
   before_action :authorize_user, only: [:show]
   
