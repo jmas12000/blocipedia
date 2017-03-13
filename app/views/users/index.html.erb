@@ -1,0 +1,30 @@
+
+<div class= "container-fluid">
+  <div class="row">
+    <h1 class="text-center"> Blocipedia Users </h1>
+  <div class= "row center-block" style= "width: 75%">
+    <div>
+      <table class= "table table-striped " >
+        <thead>
+          <tr>
+            <th class= "">User</th>
+            <th class= "text-center">Collaborating wikis</th>
+            <th class= "text-center">Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class= "text-left text-primary"><%= user.email %></td>
+              <td class= "text-center text-danger"><%= user.collaborating_wikis.count %></td>
+              <td class= "text-center text-success"><%= user.role.capitalize %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+

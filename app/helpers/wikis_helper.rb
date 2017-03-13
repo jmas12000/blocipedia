@@ -1,9 +1,9 @@
 module WikisHelper
-  def user_is_authorized_for_wikis(wiki)
-    if wiki.private?
-      current_user.admin? || current_user.premium?
-    else
-      current_user.standard? || current_user.premium? || current_user.admin?
-    end
+  def authorized_collaborators?(wiki)
+    wiki.collaborators.include?(current_user) || current_user.admin? || current_user.id == wiki.user_id
+  end
+  
+  def owner_of_wiki?(wiki)
+    current_user.admin? || current_user.id == @wiki.user_id
   end
 end

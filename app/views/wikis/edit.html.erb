@@ -1,35 +1,19 @@
-<h1>Edit Wiki</h1>
- 
+<h4 class= "text-center"><b>Edit: <%= @wiki.markdown_title %></b></h4>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-2">
     <p>A website that allows collaborative editing of its content and structure by its users</p>
     <ul>
       <li>Wikis permit asynchronous communication and group collaboration
-across the Interne</li>
-      <li> The results of the users’ actions on the content of
-the site are instantly visible to other users</li>
+       across the Interne</li>
       <li> The term "Wiki" is used as an alliterative substitute for quick</li>
     </ul>
   </div>
-  <div class="col-md-8">
-    <%= form_for @wiki do |f| %>
-      <div class="form-group">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
-      </div>
-      <% if current_user.admin? || current_user.premium? %>
-        <div class="form-group">
-          <%= f.label :private, class: 'checkbox' %> Private wiki
-          <%= f.check_box :private %> 
-        </div>
-      <% end %>
-      <div class="form-group">
-        <%= f.label :body %>
-        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit "Save", class: 'btn btn-success' %>
-      </div>
+  <div class="col-md-5">
+    <%= render partial: 'wikis/form' %>
+  </div>
+  <div class="col-md-5">
+    <% if owner_of_wiki?(@wiki) %>
+      <%= render partial: 'wikis/wiki', locals: { wiki: @wiki, user: @user } %>
     <% end %>
   </div>
 </div>

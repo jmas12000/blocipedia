@@ -27,6 +27,7 @@ source 'https://rubygems.org'
  gem 'redcarpet'
  gem 'albino'
  gem 'nokogiri'
+ gem 'will_paginate', '~> 3.1.0'
  
  
  group :development, :test do

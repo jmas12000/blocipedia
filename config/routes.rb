@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
-  resources :wikis
-  resources :charges, only: [:new, :create, :delete]
+ resources :wikis
+  resources :charges, only: [:new, :create]
 
   devise_for :users
   
@@ -9,6 +8,12 @@ Rails.application.routes.draw do
     member do
       post :downgrade
     end
+  end
+  
+  resources :wikis do
+    resources :collaborations
+    post '/create_collaborator' => 'wikis#create_collaborator', as: :create_collaborator
+    delete '/destroy_collaborator' => 'wikis#destroy_collaborator', as: :destroy_collaborator
   end
  
   get 'about' => 'welcome#about'

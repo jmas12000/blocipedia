@@ -15,3 +15,47 @@
  */
 
 @import "bootstrap";
+
+body {
+  background-color: #f5f5f5;
+  
+}
+
+.nav {
+  background-color: #ededed;
+  box-shadow: 0px 0px 20px #c1e5e5;
+  background: linear-gradient(#f5f5f5, #e1e1e1, #f5f5f5);
+  border-bottom: none;
+ 
+}
+h1 {
+  color: rgba(200,120,45,.9);
+  text-shadow: 2px 0px 1px #000000;
+  padding: 0px 0px 55px 0px;
+}
+
+blockquote {
+  color: #003000;
+}
+
+.paginate {
+  margin-top: 10px;
+  margin-left: 45px;
+  
+  
+}
+
+.pagination {
+  .previous_page { background:#cccccc; color:white }
+  .previous_page.disabled { background: #f5f5f5; color: #f5f5f5 }
+  .current { background: #dddddd }
+  .next_page { background: #cccccc; color: white }
+  .next_page.disabled { background: #f5f5f5; color: #f5f5f5 }
+}
+.pagination {
+  .previous_page { background: black; color:white }
+  .previous_page.disabled { background: black; color: black }
+  .current { background: #dddddd }
+  .next_page { background: black; color: white }
+  .next_page.disabled { background: black; color: black }
+}

@@ -1,0 +1,29 @@
+<table class="table" style= "margin-top: 20px">
+	<thead>
+	  <tr class= "bg-success">
+		<th>Email</th>
+		<th>Add Collaborator</th>
+		<th>Delete Collaborator</th>
+	  </tr>
+	</thead>
+	<tbody>	
+		<div class="field">
+		  <% @users.each do |user| %>
+			  <div class="form-group">
+			    <% unless user == @wiki.user %>
+			      <tr>
+			        <td><%= user.email %></td>
+			        <% if @wiki.collaborators.include?(user) %>
+			          <td></td>
+			          <td><%= button_to "Delete Collaborator", wiki_destroy_collaborator_path(@wiki.id, @user), method: :delete, params: { user_id: user.id }, class: "btn btn-danger" %></td>
+			        <% else %>
+			          <td><%= button_to "Add Collaborator", wiki_create_collaborator_path(@wiki.id), params: { user_id: user.id }, class:"btn btn-primary" %></td>
+			          <td><%= button_to "Delete Collaborator", wiki_destroy_collaborator_path(@wiki.id, @user), method: :delete, params: { user_id: user.id }, class: "btn btn-danger" %></td>	
+			        <% end %>
+			      </tr>
+			    <% end %>
+			  </div>
+		  <% end %>
+		</div>
+	</tbody>
+</table> 
