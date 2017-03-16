@@ -1,7 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.web_console.whitelisted_ips = '68.4.233.155'
-  config.web_console.whiny_requests = false
+  #config.web_console.whitelisted_ips = '68.4.233.155'
+  #config.web_console.whiny_requests = false
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -18,8 +18,8 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: "localhost:3000" }
-  config.action_mailer.delivery_method = :smtp
-config.action_mailer.smtp_settings = {
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
   :user_name => '9ba75febe80372',
   :password => 'f16cbf6039e654',
   :address => 'smtp.mailtrap.io',
