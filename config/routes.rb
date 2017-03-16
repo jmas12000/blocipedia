@@ -11,9 +11,16 @@ Rails.application.routes.draw do
   end
   
   resources :wikis do
-    resources :collaborations
-    post '/create_collaborator' => 'wikis#create_collaborator', as: :create_collaborator
-    delete '/destroy_collaborator' => 'wikis#destroy_collaborator', as: :destroy_collaborator
+   # resources :collaborations, only: [] do
+   #   collection do
+    #    post :create_collaborator
+    #  end
+     # member do
+     #   delete :destroy_collaborator
+     # end
+   # end
+   post '/create_collaborator' => 'wikis#create_collaborator', as: :create_collaborator
+   delete '/destroy_collaborator' => 'wikis#destroy_collaborator', as: :destroy_collaborator
   end
  
   get 'about' => 'welcome#about'

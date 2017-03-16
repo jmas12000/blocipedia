@@ -1,49 +1,55 @@
-<div class="container-fluid">
-  <div class= "row">
-    <div>
+<div class= "wiki-show-container">
+  <div class= "wiki-show">
+    <div class= "back-button center-block">
       <%= link_to "Back to wikis", wikis_path %>
     </div>
-    <div class= "col-xl-12 center-block" style= "width: 60%">
-      <h2 class= "text-center"> <%= @wiki.markdown_title %> </h2>
-      <div class= "text-center">
-        <p class= "center-align"><%= @wiki.markdown_body %></p>
+    <div class= "col-xl-12 center-block show-info" style= "width: 60%">
+      <h2 class= "text-center text-primary"> <%= @wiki.markdown_title %> </h2>
+      <div class= "text-center show-body">
+        <p class= "center-align text-warning"><%= @wiki.markdown_body %></p>
         <small class= "text-center text-success">
           <i>Wiki submitted <%= time_ago_in_words(@wiki.created_at) %> ago.<br/> Last updated on <%= @wiki.updated_at%>.</i><br/>
         </small>
       </div>
       <div class= "wiki-update text-center" style= "margin-top: 25px">
-        <% if owner_of_wiki?(@wiki) %>
+        <% if owner_of_wiki?(@wiki) && @wiki.user.role != "standard" %>
           <%= link_to "Add/Remove Collaborator", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-          <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
+        <% end %>
+        <% if owner_of_wiki?(@wiki) %>
+          <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %> 
         <% end %>
         <% if authorized_collaborators?(@wiki) %>
           <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-primary' %>
         <% end %>
       </div>
-      <% unless @wiki.collaborators.empty? %>
-        <div class= "collab-show" style= "margin-top: 30px">
-          <table class="table">
-            <thead>
-			        <tr class= "bg-success">
-				        <th class= "" style= "padding: 0px"><h4>Collaborators for this Wiki</h4></th>
-				        <th class= "text-right" style= "padding: 0px"><h4>Delete Collaborator</h4></th>
-				      </tr>
-		        </thead>
-		        <tbody>
-              <% @wiki.collaborators.each do |collaborator| %>
-                <tr>
-                  <td class= "text-warning"><strong><%= collaborator.email %></strong></td>
-                  <% if owner_of_wiki?(@wiki) %>
-                    <td><%= button_to "Delete Collaborator", wiki_destroy_collaborator_path(@wiki.id, @user), method: :delete, params: { user_id: collaborator.id }, class: "btn btn-danger pull-right" %></td>
-                  <% end %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
     </div>
   </div>
+  <div class= "show-collab">
+    <% unless @wiki.collaborators.empty? || current_user.role == "standard" %>
+      <div class= "collab-show" >
+        <table class="table">
+          <thead>
+			       <tr class= "bg-success">
+				      <th class= "" style= "padding: 0px"><h4>Collaborators for this Wiki</h4></th>
+				      <th class= "text-right" style= "padding: 0px"><h4>Delete Collaborator</h4></th>
+				    </tr>
+		      </thead>
+		      <tbody>
+            <% @wiki.collaborators.each do |collaborator| %>
+              <tr>
+                <td class= "text-warning"><strong><%= collaborator.email %></strong></td>
+                <% if owner_of_wiki?(@wiki) %>
+                  <td><%= button_to "Delete Collaborator", wiki_destroy_collaborator_path(@wiki.id, @user), method: :delete, params: { user_id: collaborator.id }, class: "btn btn-danger pull-right" %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
 </div>
+  
+
 
   

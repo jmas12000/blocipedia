@@ -1,0 +1,185 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree  .
+ *= require_self
+ */
+
+@import "bootstrap";
+
+/*Application CSS*/
+
+body {
+  background-color: #f5f5f5;
+}
+
+.nav {
+  background-color: #ededed;
+  box-shadow: 0px 0px 20px #c1e5e5;
+  background: linear-gradient(#f5f5f5, #e1e1e1, #f5f5f5);
+  border-bottom: none;
+}
+
+h1 {
+  color: rgba(200,120,45,.9);
+  text-shadow: 2px 0px 1px #000000;
+  padding: 0px 0px 35px 0px;
+}
+
+blockquote {
+  color: #003000;
+}
+
+.paginate {
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.pagination {
+  .previous_page {color: silver}
+  .previous_page.disabled {color: black}
+  .current {color: silver}
+  .next_page {color: silver}
+  .next_page.disabled {color: black }
+}
+
+/*Wiki Index CSS*/
+
+.wiki-main {
+  background: transparent url("https://cdn.pixabay.com/photo/2013/07/12/13/58/ipad-147691_960_720.png") ;
+  background-size: 100% 103%;
+  background-repeat: no-repeat;
+  background-position: 50% 33%; 
+}
+
+.wiki-container {
+  margin-top: 30px;
+  width: 75%; 
+}
+
+.wiki-title {
+  padding: 3% 3% 5% 3%;
+  color: silver;
+  text-shadow: 2px 0px 1px #810000;
+}
+
+.wiki-titles {
+  padding-top: 0px;
+}
+
+.new-wiki {
+  width: 40%;
+  color: silver;
+}
+
+/*Wiki Edit CSS*/
+
+.wiki-small {
+  background: transparent url("https://cdn.pixabay.com/photo/2013/07/12/13/58/ipad-147691_960_720.png") ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white; 
+}
+
+.wiki-edit-container {
+  height: 100%;
+  width: 100%;
+}
+
+.edit-form {
+  text-align: center;
+  padding: 15% 20% 15% 20%; 
+}
+
+.edit-list {
+  list-style-type: none;
+}
+
+.edit-text {
+  margin: auto auto;
+}
+
+/* Show Wikis CSS */
+
+.wiki-show-container {
+  height: 700px; 
+}
+
+.wiki-show {
+  background: transparent url("https://cdn.pixabay.com/photo/2013/07/12/13/58/ipad-147691_960_720.png") ;
+  background-size: 100% 75%;
+  background-repeat: no-repeat;
+  color: white;
+  height: 100%;
+}
+
+.back-button {
+  padding-top: 20px;
+  margin-left: 45%; 
+}
+
+.show-body {
+  padding-top: 15px;
+}
+
+.show-info {
+  padding-top: 10%;
+}
+
+.show-collab {
+  height: 20%;
+  margin-top: -15%;
+}
+
+/* New Wikis CSS */
+
+.wiki-new {
+  background: transparent url("https://cdn.pixabay.com/photo/2013/07/12/13/58/ipad-147691_960_720.png") ;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  color: white; 
+}
+
+.wiki-new-container {
+  height: 110%;
+  width: 100%; 
+}
+
+.new-form {
+  text-align: center;
+  padding-top: 13%;
+}
+
+.text-heading {
+  color: silver;
+  text-shadow: 2px 0px 1px #810000;
+}
+
+.new-list {
+  list-style-type: none;
+}
+
+.new-text {
+  width: 100%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.new-wiki-form {
+  padding: 3% 10% 10% 10%; 
+}
+
+/*_form CSS */
+
+.form-contain {
+  width: 75%;
+}

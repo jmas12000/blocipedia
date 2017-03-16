@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe WikisController, type: :controller do
   let(:user) {create(:user) }
-  let(:my_wiki) { create(:wiki) }
+  let(:my_wiki) { create(:wiki, user: user) }
   let(:my_private_wiki) { create(:wiki, private: true) }
   
   before :each do
     sign_in user
+    
   end
   
   describe "GET index" do
@@ -14,13 +15,7 @@ RSpec.describe WikisController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
-    
-    it "assigns [my_wiki] to @wiki" do
-      get :index
-      expect(assigns(:wikis)).to eq([my_wiki])
-    end
   end
-
   describe "GET show" do
     it "returns http success" do
       get :show, {id: my_wiki.id}
@@ -142,15 +137,15 @@ RSpec.describe WikisController, type: :controller do
     end
   end
   
-  context "premium user able to view private wiki" do
+  context "premium user not able to view other users private wiki" do
      before do
       user.premium!
     end
     
     describe "Get private Wiki" do
       it "returns http success" do
-        get :show, id: my_private_wiki.id, user: my_premium_user
-        expect(response).to have_http_status(:success)
+        get :show, id: my_private_wiki.id
+        expect(response).to_not render_template :show
       end
     end
   end

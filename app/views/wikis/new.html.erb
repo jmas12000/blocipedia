@@ -1,17 +1,21 @@
-<h1 class= "text-center">New Wiki</h1>
- 
-<div class="row">
-  <div class="col-md-4">
-    <p>A website that allows collaborative editing of its content and structure by its users</p>
-    <ul>
-      <li>Wikis permit asynchronous communication and group collaboration
-      across the Interne</li>
-      <li> The results of the users’ actions on the content of
-      the site are instantly visible to other users</li>
-      <li> The term "Wiki" is used as an alliterative substitute for quick</li>
-    </ul>
+<div class= "wiki-new-container">
+  <div class= "wiki-new">
+    <div class= "center-block new-form">
+      <h1 class= "text-center text-heading">New Wiki</h1>
+      <div class="row">
+        <div class="col-xl-6 new-text text-center text-warning ">
+          <p class= "text-center">A website that allows collaborative editing of its content and structure by its users</p>
+          <ul class= "new-list text-center">
+            <li>Wikis permit asynchronous communication and group collaboration
+             across the Interne</li>
+            <li> The term "Wiki" is used as an alliterative substitute for quick</li>
+          </ul>
+        </div>
+        <div class="col-xl-6 new-wiki-form">
+          <%= render partial: 'wikis/form' %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-8">
-    <%= render partial: 'wikis/form' %> 
-  </div>
+  <div >
 </div>

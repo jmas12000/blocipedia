@@ -5,7 +5,7 @@ class WikiPolicy < ApplicationPolicy
   end
   
   def show?
-    user.present?
+   record.public? || user.role == 'admin' || (user.role == 'premium' && record.user == user) || record.collaborators.include?(user)#user.present?
   end
 
   def update?
@@ -17,15 +17,15 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def new?
-    show?
+    user.present?
   end
 
   def create?
-    show?
+    user.present?
   end
 
   def edit?
-    show?
+    user.role == 'admin' || record.user == user || record.collaborators.include?(user)
   end
 
   class Scope
@@ -44,14 +44,14 @@ class WikiPolicy < ApplicationPolicy
       elsif user.role == 'premium'
         all_wikis = scope.all
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.collaborators.include?(@user) || wiki.user == user
+          if wiki.public? || user.role == 'admin' || (user.role == 'premium' && wiki.user == user) || wiki.collaborators.include?(user) 
             wikis << wiki
           end
         end
       else
         all_wikis = scope.all
         all_wikis.each do |wiki|
-          if wiki.public? || wiki.collaborators.include?(user)
+          if wiki.public? || wiki.collaborators.include?(user) || wiki.user_id == user.id
             wikis << wiki
           end
         end

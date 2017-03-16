@@ -1,19 +1,33 @@
-<%= form_for @wiki do |f| %>
-  <div class="form-group has-success has-feedback">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control focus', placeholder: "Enter wiki title" %>
-  </div>
-  <% if current_user.admin? || current_user.premium? %>
-    <div class="form-group">
-      <%= f.label :private %>
-      <%= f.check_box :private %> 
+<div class = "form-contain center-block">
+  <%= form_for @wiki do |f| %>
+    <div class="form-group has-success has-feedback text-primary text-left">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: 'form-control focus', placeholder: "Enter wiki title" %>
+    </div>
+    <% if @wiki.created_at.nil? %>
+      <% if current_user.role == "premium" || current_user.role == "admin" %>
+        <div class="form-group text-primary text-left">
+          <%= f.label :private %>
+          <%= f.check_box :private %> 
+        </div>
+      <% end %>
+    <% else %>
+      <% if owner_of_wiki?(@wiki) && current_user.role != "standard" %>
+        <div class="form-group text-primary text-left">
+          <%= f.label :private %>
+          <%= f.check_box :private %> 
+        </div>
+      <% end %>
+    <% end %>
+    <div class="form-group has-success has-feedback text-primary text-left">
+      <%= f.label :body %>
+      <%= f.text_area :body, rows: 8, class: 'form-control focus', placeholder: "Enter wiki body" %>
+    </div>
+    <div class="form-group has-success has-feedback text-center">
+      <%= f.submit "Save", class: 'btn btn-success' %>
+      <% unless @wiki.created_at.nil? && owner_of_wiki?(@wiki) %>
+        <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %> 
+      <% end %>
     </div>
   <% end %>
-  <div class="form-group has-success has-feedback">
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control focus', placeholder: "Enter wiki body" %>
-  </div>
-  <div class="form-group has-success has-feedback">
-    <%= f.submit "Save", class: 'btn btn-success' %>
-  </div>
-<% end %>
+</div>

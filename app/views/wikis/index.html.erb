@@ -1,32 +1,32 @@
-<div class= "container wiki">
-<div class= "paginate ">
-  <%= will_paginate @wikis %>
-</div>
-<div class="container-fluid center-block" style= "width: 75%">
-  <div class= "row header" >
-    <h1 class= "text-center">All Wikis</h1>
+<div class= "container wiki-main ">
+  <div class= "paginate">
+    <%= will_paginate @wikis %>
   </div>
-  <div class= " text-center center-block" style= "width: 40%">
-    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary btn-block text-danger'%>
-  </div>
-  <div class ="wiki_titles" style= "margin-top: 20px" >
-    <% @wikis.each do |wiki| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading text-center">
+  <div class= "row center-block wiki-container" style= "width: 75%">
+    <div class= "header">
+      <h1 class= "text-center wiki-title"><strong>All Wikis</strong></h1>
+    </div>
+    <div class ="wiki-titles" style= "margin-top: 20px">
+      <% @wikis.each do |wiki| %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading text-center">
             <%= link_to wiki.markdown_title, wiki %>
-          </h4>
-          <small class= "text-center text-warning">
-            <%= wiki.markdown_body %>
-          </small>  
+            </h4>
+            <small class= "text-center text-warning">
+              <%= wiki.markdown_body %>
+            </small>  
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div class= "paginate">
-  <%= will_paginate @wikis %>
-</div>
+  <div class= "text-center center-block new-wiki">
+    <%= link_to "New Wiki", new_wiki_path, class: 'btn btn-primary btn-block'%>
+  </div>
+  <div class= "paginate">
+    <%= will_paginate @wikis %>
+  </div>
 </div>
 
 

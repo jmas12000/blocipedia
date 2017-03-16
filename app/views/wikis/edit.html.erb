@@ -1,19 +1,26 @@
-<h4 class= "text-center"><b>Edit: <%= @wiki.markdown_title %></b></h4>
-<div class="row">
-  <div class="col-md-2">
-    <p>A website that allows collaborative editing of its content and structure by its users</p>
-    <ul>
-      <li>Wikis permit asynchronous communication and group collaboration
-       across the Interne</li>
-      <li> The term "Wiki" is used as an alliterative substitute for quick</li>
-    </ul>
+<div class= "wiki-edit-container">
+  <div class= "wiki-small">
+    <div class= "center-block edit-form">
+      <h4 class= "text-center text-primary"><b class= "text-danger">Edit: </b><%= @wiki.markdown_title %></h4>
+      <div class="row">
+        <div class="col-xl-4 edit-text text-warning ">
+          <p>A website that allows collaborative editing of its content and structure by its users</p>
+          <ul class= "edit-list">
+            <li>Wikis permit asynchronous communication and group collaboration
+             across the Interne</li>
+            <li> The term "Wiki" is used as an alliterative substitute for quick</li>
+          </ul>
+        </div>
+        <div class="col-xl-4">
+          <%= render partial: 'wikis/form' %>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="col-md-5">
-    <%= render partial: 'wikis/form' %>
-  </div>
-  <div class="col-md-5">
-    <% if owner_of_wiki?(@wiki) %>
+  <div class="col-xl-4">
+    <% if owner_of_wiki?(@wiki) && @wiki.user.role != "standard" %>
       <%= render partial: 'wikis/wiki', locals: { wiki: @wiki, user: @user } %>
     <% end %>
   </div>
 </div>
+

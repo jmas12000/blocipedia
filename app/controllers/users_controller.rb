@@ -16,6 +16,22 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
-  def destroy
+  def downgrade
+    @user = current_user
+    @user.update_attribute(:role, "standard")
+    @wikis = @user.wikis.where(user_id: @user.id).all
+    
+    @wikis.each do |wiki|
+      wiki.update_attribute(:private, "false")
+      wiki.collaborators = []
+    end
+    if @user
+      flash[:notice] = "You've been downgraded to #{@user.role}. Your private wikis are now public."
+      redirect_to :root
+    else
+      flash[:error] = "There was an error downgrading your account. Please try again."
+      redirect_to :back
+    end
   end
 end
+
